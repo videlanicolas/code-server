@@ -13,6 +13,7 @@ import { canConnect } from "./util"
  */
 export class SocketProxyProvider {
   private readonly onProxyConnect = new Emitter<net.Socket>()
+  // TODO don't use tmpdir
   private proxyPipe = path.join(tmpdir, "tls-proxy")
   private _proxyServer?: Promise<net.Server>
   private readonly proxyTimeout = 5000
@@ -76,6 +77,7 @@ export class SocketProxyProvider {
       this._proxyServer = this.findFreeSocketPath(this.proxyPipe)
         .then((pipe) => {
           this.proxyPipe = pipe
+          // TODO don't use tmpdir
           return Promise.all([fs.mkdir(tmpdir, { recursive: true }), fs.rmdir(this.proxyPipe, { recursive: true })])
         })
         .then(() => {
