@@ -8,6 +8,7 @@ import * as path from "path"
 import * as util from "util"
 import xdgBasedir from "xdg-basedir"
 
+// TODO add runtime to interface
 interface Paths {
   data: string
   config: string
@@ -33,6 +34,7 @@ function getEnvPaths(): Paths {
     paths = {
       data: path.join(xdgBasedir.data, "code-server"),
       config: path.join(xdgBasedir.config, "code-server"),
+      // TODO get xdgBasedir.runtime
     }
   }
 
